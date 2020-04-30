@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { delay } from 'rxjs/internal/operators';
+import { BehaviorSubject, Observable, of, throwError, timer } from 'rxjs';
+import { delay, catchError, mergeMap } from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,14 @@ export class AuthService {
     }
     else{
       //return error in observable
-      return throwError({username:username,login:"failed",error:"username or password is incorrect"}).pipe(delay(30000));
+      // setTimeout( () => {
+      //   return throwError({username:username,login:"failed",error:"username or password is incorrect"}).pipe(delay(30000))
+      // },3000);
+      return throwError({username:username,login:"failed",error:"username or password is incorrect"})
+      .pipe(
+        // We catch the error, we delay by adding timer stream, then we mergeMap to the error.
+        catchError(e => timer(3000).pipe(mergeMap(t => throwError(e)))
+      ))
 
     }
   }

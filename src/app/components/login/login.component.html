@@ -13,7 +13,11 @@
             <input formControlName="password" type="password" placeholder="Enter Password" name="psw" required>
             <span class="text-danger" *ngIf="(controls.password.touched ) && controls.password.errors?.required">Password is required</span>  
             <button type="submit" [disabled]="!loginForm.valid">Login</button>
+            <app-overlay *ngIf="loading" [getMessage]="overlayMessage"></app-overlay>
             
         </form>
+        
     </div>
+    
 </div>
+

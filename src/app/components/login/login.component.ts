@@ -40,13 +40,19 @@ export class LoginComponent implements OnInit {
 
   errorMessage:string;
   errorCondition:boolean=false;
+  overlayMessage:string='Logging In.. Please Wait..';
+  loading:boolean=false;
   login(){
+    this.overlayMessage = 'Logging In.. Please Wait..';
+    this.loading=true;
     this.auth.loginUser(this.loginForm.get('username').value,this.loginForm.get('password').value).pipe(takeUntil(this.destroyed$))
     .subscribe( (res) => {
+      this.loading=false;
       console.log('in success');
       console.log(res);
     },
     (err) => {
+      this.loading=false;
       this.errorCondition=true;
       this.errorMessage= err.error;
       console.log('in error');
