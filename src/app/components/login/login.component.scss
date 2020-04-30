@@ -31,7 +31,7 @@
 .login-header{
     text-align: center;
     font-weight: 200;
-    height: 50px;
+    height: 40px;
     width: 100%;
 }
 
@@ -59,4 +59,11 @@ button {
 
 button:hover {
   opacity: 0.8;
+}
+.text-danger{
+  margin-top: 3px;
+  margin-bottom: 4px;
+  padding: 4px 0px 4px 0px;
+  display: block;
+  color: red;
 }

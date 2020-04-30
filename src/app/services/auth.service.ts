@@ -31,7 +31,7 @@ export class AuthService {
     }
     else{
       //return error in observable
-      return throwError({username:username,login:"failed",error:"username or password is incorrect"}).pipe(delay(3000));
+      return throwError({username:username,login:"failed",error:"username or password is incorrect"}).pipe(delay(30000));
 
     }
   }
