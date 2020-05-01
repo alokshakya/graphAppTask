@@ -12,6 +12,10 @@ export class HomeComponent implements OnInit {
   constructor(private auth:AuthService) { }
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   showSidenav:boolean;
+  links=[
+    {path:'./graph', title:"Graphs"},
+    {path:'./dashboard', title:"Dashboard"}
+  ]
   ngOnInit(): void {
     this.auth.getSidenav().pipe(takeUntil(this.destroyed$)).subscribe(val => {
       this.showSidenav = val;

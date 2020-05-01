@@ -1,6 +1,10 @@
 
 <div id="sidenav" class="sidenav" [ngClass]="{'sidenav-margin-left':showSidenav}">
-
+    <div class="sidenav-container">
+        <ul>
+            <li *ngFor="let link of links" [routerLink]=[link.path] routerLinkActive="active">{{link.title}}</li>
+        </ul>
+    </div>
 </div>
 <div id="content" class="content" [ngClass]="{'content-margin-left':showSidenav}">
     <router-outlet></router-outlet>
