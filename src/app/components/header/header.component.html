@@ -1,0 +1,27 @@
+<header>
+    <nav>
+        <a *ngIf="isLoggedIn">
+            <img src="assets/images/ham.svg" alt="toggle menu" class="menu" id="menu">
+        </a>
+        <a>
+            <img src="favicon.ico" alt="toggle menu" class="logo">
+        </a>
+        <div class="user-section" *ngIf="isLoggedIn">
+            <a class="user-profile-container" id="user-profile-container" (click)="updateDropdown()">  
+                <img src="assets/images/user1.png" alt="toggle menu" class="user-id" id="user-id">
+                <img id="down-btn" src="assets/images/down.svg" alt="down-btn">
+            </a>
+            
+        </div>
+    </nav>   
+</header>
+<div id="user-dropdown" class="user-dropdown" [ngClass]="{'show-user-dropdown':showDropdown, 'hide-user-dropdown':!showDropdown}">
+    <ul>
+        <li>
+            Profile
+        </li>
+        <li (click)="logout()">
+            Logout
+        </li>
+    </ul>
+</div>
