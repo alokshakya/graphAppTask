@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.loader{
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 100;
+    opacity: 0.6;
+}

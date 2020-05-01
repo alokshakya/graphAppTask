@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h2>Login</h2>
+              
+        </div>
+        <span class="text-danger" *ngIf="errorCondition">{{errorMessage}}</span>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+            <label for="uname"><b>Username</b></label>
+            <input formControlName="username" type="text" placeholder="Enter Username" name="uname" required>
+            <span class="text-danger" *ngIf="(controls.username.touched ) && controls.username.errors?.required">Username is required</span>
+            <label for="psw"><b>Password</b></label>
+            <input formControlName="password" type="password" placeholder="Enter Password" name="psw" required>
+            <span class="text-danger" *ngIf="(controls.password.touched ) && controls.password.errors?.required">Password is required</span>  
+            <button type="submit" [disabled]="!loginForm.valid">Login</button>
+            <app-overlay *ngIf="loading" [getMessage]="overlayMessage"></app-overlay>
+            
+        </form>
+        
+    </div>
+    
+</div>
+
