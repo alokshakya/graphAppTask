@@ -12,7 +12,7 @@ export class AuthService {
   isLoginSubject = new BehaviorSubject<boolean>(this.hasUser());
 
   private hasUser() : boolean {
-    return !!localStorage.getItem('user');
+    return !!localStorage.getItem('loggedIn');
   }
   
   isLoggedIn() : Observable<boolean> {
@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   logout() : void {
-    localStorage.removeItem('user');
+    localStorage.removeItem('loggedIn');
     //let all subscribers know that user is loggedOut
     this.isLoginSubject.next(false);
   }

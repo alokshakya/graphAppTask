@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ReplaySubject } from 'rxjs';
@@ -10,7 +11,7 @@ import { takeUntil } from 'rxjs/internal/operators';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private fb:FormBuilder) { }
+  constructor(private auth: AuthService, private fb:FormBuilder, private router:Router) { }
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   ngOnInit(): void {
     this.initLoginForm();
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
     this.auth.loginUser(this.loginForm.get('username').value,this.loginForm.get('password').value).pipe(takeUntil(this.destroyed$))
     .subscribe( (res) => {
       this.loading=false;
+      this.router.navigateByUrl('home');
       console.log('in success');
       console.log(res);
     },

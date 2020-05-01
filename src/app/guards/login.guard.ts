@@ -6,7 +6,7 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  isLoggedIn:boolean=false;
+  isLoggedIn:boolean;
   constructor(private auth:AuthService, private router:Router){
     this.auth.isLoggedIn().subscribe( val => {
       this.isLoggedIn = val;
