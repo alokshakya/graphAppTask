@@ -1,4 +1,7 @@
-<p>home works!</p>
-<div>
-    <router-outlet></router-outlet>    
+
+<div id="sidenav" class="sidenav" [ngClass]="{'sidenav-margin-left':showSidenav}">
+
+</div>
+<div id="content" class="content" [ngClass]="{'content-margin-left':showSidenav}">
+    <router-outlet></router-outlet>
 </div>

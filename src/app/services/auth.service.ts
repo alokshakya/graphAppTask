@@ -52,4 +52,15 @@ export class AuthService {
     this.isLoginSubject.next(false);
   }
 
+  //sidenav show hide functionality from header to other componets
+  isSidenavOpen = new BehaviorSubject<boolean>(false);
+  sidenav:boolean=false;
+  setSidenav():void{
+    this.sidenav = !this.sidenav;
+    this.isSidenavOpen.next(this.sidenav);
+  }
+  getSidenav():Observable<boolean>{
+    return this.isSidenavOpen.asObservable();
+  }
+
 }

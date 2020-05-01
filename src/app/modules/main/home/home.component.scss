@@ -1,0 +1,70 @@
+.sidenav{
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    min-width: 260px;
+    margin-left: -260px;
+    background-color: yellow;
+    box-shadow: 6px 0 6px rgba(0,0,0,.1);
+    transition-property: margin-left,min-width;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0.2s;
+}
+
+.sidenav-margin-left{
+    margin-left: 0px; 
+}
+
+.content{
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
+    background-color: red;
+    transition-property: margin-left,width;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0.2s;
+    
+}
+
+.content-margin-left{
+    width: calc(100% - 260px);
+    margin-left: 260px;
+}
+
+
+
+
+@media only screen and (min-width: 700px)  {
+    /* header nav .user-section{
+        padding-left: 78%;
+    } */
+    .sidenav{
+        /*on this time sidebar should be shown by default so margin-left 0*/
+        margin-left: 0px;
+    }
+    .sidenav-margin-left{
+        /*menu should be hidden margin left in negative 260px*/
+        margin-left: -260px;
+    }
+    .content{
+        /*by default sidebar will be visible so margin left 260px for sidebar and width -260px*/
+        width: calc(100% - 260px);
+        margin-left: 260px;
+    }
+    .content-margin-left{
+        /*since sidebar will be hidden no margin on left and full width*/
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    
+}

@@ -1,6 +1,6 @@
 <header>
     <nav>
-        <a *ngIf="isLoggedIn">
+        <a *ngIf="isLoggedIn" (click)="toggleSidenav()">
             <img src="assets/images/ham.svg" alt="toggle menu" class="menu" id="menu">
         </a>
         <a>
