@@ -21,11 +21,14 @@ export class AuthService {
 
   loginUser(username:string,password:string):Observable<any>{
     if(username=="alok" && password=="alok123"){
-      //set loggedIn true in localStorage to track already logged user
-      localStorage.setItem('loggedIn',"true");
-      //let all subscribers know that user is loggedIn
-      this.isLoginSubject.next(true);
-      //return observable true;
+      //set loggedIn true in localStorage to track already logged user after 2.95 sec
+      setTimeout(() => {
+        localStorage.setItem('loggedIn',"true");
+        //let all subscribers know that user is loggedIn
+        this.isLoginSubject.next(true);
+        //return observable true;
+      }, 2950);
+      
       // return obserbale after 3s to simulate response from server
       return of({username:username,login:"success"}).pipe( delay(3000));
     }
