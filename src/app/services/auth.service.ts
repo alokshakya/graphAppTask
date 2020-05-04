@@ -21,11 +21,14 @@ export class AuthService {
 
   loginUser(username:string,password:string):Observable<any>{
     if(username=="alok" && password=="alok123"){
-      //set loggedIn true in localStorage to track already logged user
-      localStorage.setItem('loggedIn',"true");
-      //let all subscribers know that user is loggedIn
-      this.isLoginSubject.next(true);
-      //return observable true;
+      //set loggedIn true in localStorage to track already logged user after 2.95 sec
+      setTimeout(() => {
+        localStorage.setItem('loggedIn',"true");
+        //let all subscribers know that user is loggedIn
+        this.isLoginSubject.next(true);
+        //return observable true;
+      }, 2950);
+      
       // return obserbale after 3s to simulate response from server
       return of({username:username,login:"success"}).pipe( delay(3000));
     }
@@ -47,6 +50,17 @@ export class AuthService {
     localStorage.removeItem('loggedIn');
     //let all subscribers know that user is loggedOut
     this.isLoginSubject.next(false);
+  }
+
+  //sidenav show hide functionality from header to other componets
+  isSidenavOpen = new BehaviorSubject<boolean>(false);
+  sidenav:boolean=false;
+  setSidenav():void{
+    this.sidenav = !this.sidenav;
+    this.isSidenavOpen.next(this.sidenav);
+  }
+  getSidenav():Observable<boolean>{
+    return this.isSidenavOpen.asObservable();
   }
 
 }

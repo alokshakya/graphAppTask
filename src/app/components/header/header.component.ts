@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  toggleSidenav(){
+    this.auth.setSidenav();
+  }
+
   updateDropdown(){
     this.showDropdown = !this.showDropdown;
   }
@@ -29,6 +33,7 @@ export class HeaderComponent implements OnInit {
     this.showDropdown = !this.showDropdown;
     this.router.navigateByUrl('login');
   }
+
 
   ngOnDestroy(){
     this.destroyed$.next(true);
