@@ -31,19 +31,22 @@ export class DisplayInformationComponent implements OnInit {
 
     
   }
+  showPie=true;
   updateChartType(type:string){
     //update chart
-    if(type= "Pie"){
+    if(type== "Pie"){
+      this.showPie=true;
       this.drawPie();
     }
     else{
+      this.showPie=false;
       this.drawBar();
 
     }
     
   }
   drawBar(){
-    this.chart = new Chart('graph-id', {
+    this.bar = new Chart('Bar', {
       type: 'bar',
       options: {
         responsive: true,
@@ -84,11 +87,10 @@ export class DisplayInformationComponent implements OnInit {
         ]
       }
     });
-    this.chart.update();
   }
 
   drawPie(){
-    this.chart = new Chart('graph-id',{
+    this.pie = new Chart('Pie',{
       type: 'pie',
       options: {
         responsive: true,
