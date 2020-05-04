@@ -17,7 +17,7 @@
 </header>
 <div id="user-dropdown" class="user-dropdown" [ngClass]="{'show-user-dropdown':showDropdown, 'hide-user-dropdown':!showDropdown}">
     <ul>
-        <li>
+        <li [routerLink]="['/home/dashboard']">
             Profile
         </li>
         <li (click)="logout()">
