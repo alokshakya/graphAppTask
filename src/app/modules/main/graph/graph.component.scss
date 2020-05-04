@@ -1,0 +1,74 @@
+.graph-container{
+    padding: 10px 20px 10px 20px;
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 0.5fr));
+
+    
+}
+
+.graph-form{
+    color: rgba(0,0,0,.87);
+    padding: 1rem;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+    box-sizing: border-box;
+    transition: box-shadow .5s;
+    min-width: 250px;
+    max-width: 400px;
+    margin: 8px 8px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.graph-info{
+    color: rgba(0,0,0,.87);
+    padding: 1rem;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+    box-sizing: border-box;
+    transition: box-shadow .5s;
+    min-width: 350px;
+    max-width: 700px;
+    margin: 8px 8px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+input[type=text], input[type=password], input[type=date], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .option-val{
+      padding: 12px 12px;
+      margin: 8px 0;
+      display: inline-block;
+        border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1em;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-left: 25%;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }

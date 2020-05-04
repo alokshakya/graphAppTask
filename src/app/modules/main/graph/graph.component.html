@@ -1,1 +1,19 @@
-<p>graph works!</p>
+<div class="graph-container">
+    <div class="graph-form">
+        <form [formGroup]="infoForm" novalidate>
+            <label for="uname"><b>Filename</b></label>
+            <input formControlName="name" type="text" placeholder="Enter filename" name="uname" required>
+            <label ><b>Type</b></label>
+            <select formControlName="type" >
+                <option *ngFor="let type of graphTypes" [ngValue]="type">{{type}}</option>
+            </select>
+            <label for="psw"><b>Date</b></label>
+            <input formControlName="date" type="date"  required>
+        </form>
+    </div>
+    <div class="graph-info">
+        <app-display-information [getFilename]="filename" [getType]="gType" (updateDate)="setDate($event)">
+
+        </app-display-information>
+    </div>
+</div>
