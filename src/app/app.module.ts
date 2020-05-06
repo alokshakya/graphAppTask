@@ -7,6 +7,10 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule}  from '@angular/forms';
 import { OverlayComponent } from './components/overlay/overlay.component';
 import { HeaderComponent } from './components/header/header.component';
+
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './ngrx/reducers/form-value.reducres';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +22,10 @@ import { HeaderComponent } from './components/header/header.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({
+      formValue:reducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

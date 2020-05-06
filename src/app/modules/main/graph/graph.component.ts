@@ -14,6 +14,24 @@ export class GraphComponent implements OnInit {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   ngOnInit(): void {
     this.initInfoForm();
+    this.formValues = this.store.select('formValue');
+    console.log('formValues output');
+    console.log(this.formValues);
+    let i=0;
+    this.formValues.subscribe( (res) => {
+      console.log('returned formValues');
+      if(i==0){ // to stop looping value will be set only first time
+        if(res.name !=''){
+          this.infoForm.controls['name'].patchValue(res.name);
+        }
+        if(res.type !=undefined){
+          this.infoForm.controls['type'].patchValue(res.type);
+          this.gType=res.type;
+        }
+        i++;
+      }
+      
+    })
     //this.infoForm.get('date').setValue(this.currentDate());
   }
 
