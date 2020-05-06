@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ReplaySubject, Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/internal/operators';
 import { AuthService } from 'src/app/services/auth.service';
-
-import { Store } from '@ngrx/store';
-import { FormValue } from '../../../ngrx/interfaces/form-value.interface';
-import { AppState } from '../../../ngrx/app.state';
-
-//import actions for updating state
-import * as FormValueActions from '../../../ngrx/actions/form-value.actions';
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
@@ -17,8 +10,7 @@ import * as FormValueActions from '../../../ngrx/actions/form-value.actions';
 })
 export class GraphComponent implements OnInit {
 
-  formValues:Observable<FormValue>;
-  constructor(private auth:AuthService, private fb:FormBuilder, private store:Store<AppState>) { }
+  constructor(private auth:AuthService, private fb:FormBuilder) { }
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   ngOnInit(): void {
     this.initInfoForm();
@@ -52,15 +44,17 @@ export class GraphComponent implements OnInit {
       type: [this.graphTypes[0]],
       date:['']
     });
-    
+    this.infoForm.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe( (r) =>{
+      
+    })
     
   }
   get filename(){
     return this.infoForm.get('name').value;
   }
-  // get gType(){
-  //   return this.infoForm.get('type').value;
-  // }
+  get gType(){
+    return this.infoForm.get('type').value;
+  }
   get controls(){
     return this.infoForm.controls;
   }
@@ -68,16 +62,10 @@ export class GraphComponent implements OnInit {
   setDate(event){
     this.infoForm.get('date').setValue(event);
   }
-
-  gType:string;
-  updateState(){
-    this.gType =this.infoForm.get('type').value;
-    let name = this.infoForm.get('name').value;
-
-      //dispatch action
-      this.store.dispatch(new FormValueActions.AddFormValue({name:name,type:this.gType}));
+  currentDate() {
+    const currentDate = new Date();
+    return currentDate.toISOString().substring(0,10);
   }
-  
 
   ngOnDestroy(){
     this.destroyed$.next(true);

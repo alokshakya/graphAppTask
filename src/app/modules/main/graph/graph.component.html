@@ -1,5 +1,6 @@
 <div class="graph-container">
     <div class="graph-form">
+
         <form [formGroup]="infoForm" (ngSubmit)="updateState()" novalidate>
             <label for="uname"><b>Filename</b></label>
             <input formControlName="name" type="text" placeholder="Enter filename" name="uname" required>
