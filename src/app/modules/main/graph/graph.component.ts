@@ -25,22 +25,15 @@ export class GraphComponent implements OnInit {
     this.formValues = this.store.select('formValue');
     console.log('formValues output');
     console.log(this.formValues);
-    let i=0;
-    this.formValues.subscribe( (res) => {
+    this.formValues.pipe(takeUntil(this.destroyed$)).subscribe( (res) => {
       console.log('returned formValues');
-      if(i==0){ // to stop looping value will be set only first time
         if(res.name !=''){
           this.infoForm.controls['name'].patchValue(res.name);
         }
         if(res.type !=undefined){
           this.infoForm.controls['type'].patchValue(res.type);
-          this.gType=res.type;
         }
-        i++;
-      }
-      
-    })
-    //this.infoForm.get('date').setValue(this.currentDate());
+    });
   }
 
   graphTypes=["Pie", "Bar"];
@@ -55,12 +48,12 @@ export class GraphComponent implements OnInit {
     
     
   }
-  get filename(){
+  get filename():string{
     return this.infoForm.get('name').value;
   }
-  // get gType(){
-  //   return this.infoForm.get('type').value;
-  // }
+  get gType():string{
+    return this.infoForm.get('type').value;
+  }
   get controls(){
     return this.infoForm.controls;
   }
@@ -69,17 +62,14 @@ export class GraphComponent implements OnInit {
     this.infoForm.get('date').setValue(event);
   }
 
-  gType:string;
   updateState(){
-    this.gType =this.infoForm.get('type').value;
-    let name = this.infoForm.get('name').value;
-
       //dispatch action
-      this.store.dispatch(new FormValueActions.AddFormValue({name:name,type:this.gType}));
+      this.store.dispatch(new FormValueActions.AddFormValue({name:this.filename,type:this.gType}));
   }
   
 
   ngOnDestroy(){
+    this.updateState();
     this.destroyed$.next(true);
     this.destroyed$.complete();
   }

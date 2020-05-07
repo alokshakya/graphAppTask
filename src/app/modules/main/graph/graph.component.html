@@ -1,6 +1,6 @@
 <div class="graph-container">
     <div class="graph-form">
-        <form [formGroup]="infoForm" (ngSubmit)="updateState()" novalidate>
+        <form [formGroup]="infoForm" novalidate>
             <label for="uname"><b>Filename</b></label>
             <input formControlName="name" type="text" placeholder="Enter filename" name="uname" required>
             <label ><b>Type</b></label>
@@ -9,7 +9,7 @@
             </select>
             <label for="psw"><b>Date</b></label>
             <input formControlName="date" type="date"  required>
-            <button type="submit" [disabled]="!infoForm.valid">Submit</button>
+            
         </form>
     </div>
     <div class="graph-info">
