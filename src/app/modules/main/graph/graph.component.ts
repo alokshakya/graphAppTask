@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/internal/operators';
 import { AuthService } from 'src/app/services/auth.service';
+
+import { Store } from '@ngrx/store';
+import { FormValue } from '../../../ngrx/interfaces/form-value.interface';
+import { AppState } from '../../../ngrx/app.state';
+
+//import actions for updating state
+import * as FormValueActions from '../../../ngrx/actions/form-value.actions';
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
@@ -10,15 +17,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class GraphComponent implements OnInit {
 
-  constructor(private auth:AuthService, private fb:FormBuilder) { }
+  formValues:Observable<FormValue>;
+  constructor(private auth:AuthService, private fb:FormBuilder, private store:Store<AppState>) { }
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   ngOnInit(): void {
     this.initInfoForm();
     this.formValues = this.store.select('formValue');
     console.log('formValues output');
     console.log(this.formValues);
-    let i=0;
-    this.formValues.subscribe( (res) => {
+    this.formValues.pipe(takeUntil(this.destroyed$)).subscribe( (res) => {
       console.log('returned formValues');
       if(i==0){ // to stop looping value will be set only first time
         if(res.name !=''){
@@ -28,11 +35,7 @@ export class GraphComponent implements OnInit {
           this.infoForm.controls['type'].patchValue(res.type);
           this.gType=res.type;
         }
-        i++;
-      }
-      
-    })
-    //this.infoForm.get('date').setValue(this.currentDate());
+    });
   }
 
   graphTypes=["Pie", "Bar"];
@@ -45,14 +48,14 @@ export class GraphComponent implements OnInit {
       date:['']
     });
     this.infoForm.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe( (r) =>{
-      
+    
     })
     
   }
-  get filename(){
+  get filename():string{
     return this.infoForm.get('name').value;
   }
-  get gType(){
+  get gType():string{
     return this.infoForm.get('type').value;
   }
   get controls(){
@@ -62,12 +65,15 @@ export class GraphComponent implements OnInit {
   setDate(event){
     this.infoForm.get('date').setValue(event);
   }
-  currentDate() {
-    const currentDate = new Date();
-    return currentDate.toISOString().substring(0,10);
+
+  updateState(){
+      //dispatch action
+      this.store.dispatch(new FormValueActions.AddFormValue({name:this.filename,type:this.gType}));
   }
+  
 
   ngOnDestroy(){
+    this.updateState();
     this.destroyed$.next(true);
     this.destroyed$.complete();
   }
